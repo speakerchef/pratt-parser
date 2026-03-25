@@ -1,0 +1,58 @@
+/*
+ * Author: Sohan Nair
+ * Date: No idea
+ *
+ */
+
+#pragma once
+
+#include <cassert>
+#include <cctype>
+#include <cstddef>
+#include <fstream>
+#include <string>
+#include <variant>
+#include <vector>
+
+enum class TokenType {
+    DELIM_SEMI,
+    KW_EXIT,
+    KW_RETURN,
+    KW_LET,
+    KW_INT,
+    LIT_INT,
+    LIT_STR,
+    VAR_INT,
+    VAR_IDENT,
+    BIN_OP,
+    OP_EQUALS,
+    OP_ADD,
+    OP_SUB,
+    OP_MULT,
+    OP_DIV,
+};
+
+typedef struct Token {
+    TokenType type;
+    std::string value;
+} Token;
+
+class Lexer {
+  public:
+    Lexer(const std::string &path) noexcept;
+
+    [[nodiscard]] std::optional<Token> peek(size_t offset) const;
+    std::optional<Token> consume();
+    std::vector<Token> tokenize();
+
+  private:
+    std::vector<Token> m_tokens;
+    size_t m_token_ptr = 0;
+    std::ifstream m_ifs;
+    std::ofstream m_ofs;
+
+    /*==========================================================*/
+    [[nodiscard]] Token classify_token(std::string &buf) noexcept;
+    [[nodiscard]] bool validate_token(const size_t offset,
+                                      const TokenType ttype) const;
+};
