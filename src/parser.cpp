@@ -1,11 +1,21 @@
 #include "parser.hpp"
 #include "lexer.hpp"
 #include <cstddef>
+#include <cstdlib>
 #include <memory>
 
 std::unique_ptr<NodeBinaryExpr> Parser::parse_expr(float min_rbp) {
+    if (!peek().has_value()) {
+        std::println(stderr, "Error: Invalid expression.");
+        exit(EXIT_FAILURE);
+    }
     BinOp op;
     auto lhs = std::make_unique<NodeBinaryExpr>();
+
+    if (peek().value().type == TokenType::DELIM_LPAREN) {
+        next();
+        lhs = parse_expr(0);
+    }
     lhs->atom = next().value().value;
 
     while (peek().has_value() && peek().value().type == TokenType::BIN_OP) {

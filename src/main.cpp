@@ -1,8 +1,5 @@
 #include "parser.hpp"
 #include <cstdlib>
-#include <exception>
-#include <print>
-#include <vector>
 
 
 int main(int argc, char **argv) {

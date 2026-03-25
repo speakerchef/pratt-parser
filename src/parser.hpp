@@ -2,10 +2,8 @@
 #include "lexer.hpp"
 #include <cstddef>
 #include <cstdlib>
-#include <exception>
 #include <memory>
 #include <optional>
-#include <stdexcept>
 #include <tuple>
 #include <utility>
 
@@ -36,7 +34,7 @@ struct NodeBinaryExpr {
 inline std::tuple<float, float> get_binding_power(BinOp bop) {
     switch (bop) {
         case BinOp::SUB:
-        case BinOp::ADD: { return {1, 1.1}; }
+        case BinOp::ADD:  { return {1, 1.1}; }
         case BinOp::DIV:
         case BinOp::MULT: { return {2, 2.1}; }
     }

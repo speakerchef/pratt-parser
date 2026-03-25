@@ -75,12 +75,14 @@ Token Lexer::classify_token(std::string &buf) noexcept {
     Token tok{};
 
     if (buf.find_first_not_of("0123456789"))   { tok.type = TokenType::LIT_INT; }
-    else if (buf.find_first_not_of("+=*/"))    { tok.type = TokenType::BIN_OP; } 
+    else if (buf.find_first_not_of("+=*/"))    { tok.type = TokenType::BIN_OP; }
 
     else if (buf == ";")    { tok.type = TokenType::DELIM_SEMI; } 
     else if (buf == "exit") { tok.type = TokenType::KW_EXIT; } 
     else if (buf == "let")  { tok.type = TokenType::KW_LET; } 
     else if (buf == "=")    { tok.type = TokenType::OP_EQUALS; } 
+    else if (buf == "(")    { tok.type = TokenType::DELIM_LPAREN; } 
+    else if (buf == ")")    { tok.type = TokenType::DELIM_RPAREN; } 
     else                    { tok.type = TokenType::VAR_IDENT; }
 
     // std::println("Unclassed: {}", buf);

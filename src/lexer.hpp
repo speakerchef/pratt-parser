@@ -20,16 +20,16 @@ enum class TokenType {
     KW_RETURN,
     KW_LET,
     KW_INT,
-    LIT_INT,
-    LIT_STR,
-    VAR_INT,
-    VAR_IDENT,
     BIN_OP,
     OP_EQUALS,
     OP_ADD,
     OP_SUB,
     OP_MULT,
     OP_DIV,
+    DELIM_LPAREN,
+    DELIM_RPAREN,
+    LIT_INT,
+    VAR_IDENT,
 };
 
 typedef struct Token {
